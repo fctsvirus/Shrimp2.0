@@ -1,0 +1,12 @@
+index:
+  .User
+    .User-input
+      .u-textDecoration
+        | Become professor:
+      input(type='checkbox', on-change='setProfessor()', checked='{{user.isProfessor}}')
+
+    form.User-form(on-submit='setUserName()')
+      .u-textDecoration
+        | Player's name:
+      input(type='text', value='{{userName}}')
+      button(type='submit') Save

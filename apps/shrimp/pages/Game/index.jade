@@ -1,0 +1,18 @@
+index:
+  ._main
+    view(is='GameInfo')
+
+    if user.isProfessor && game.currentRound < game.rounds.length
+      view(is='Professor')
+
+    if game.started && !game.finished && !user.isProfessor
+      view(is='SubmitForm')
+
+    if !game.started
+      .Game-btnStart
+        if players.length < game.maxPlayers
+          button.Game-btnStart-disabled(disabled) Start
+        else if players.length == game.maxPlayers
+          button(on-click='startGame()') Start
+
+    view(is='Table')

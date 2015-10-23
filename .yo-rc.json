@@ -1,0 +1,9 @@
+{
+  "generator-derby": {
+    "project": "Shrimp2 0",
+    "apps": [
+      "shrimp"
+    ],
+    "coffee": true
+  }
+}

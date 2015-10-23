@@ -1,0 +1,7 @@
+index:
+  .CreateGame
+    form.CreateGame-form(on-submit='createGame()')
+      .u-textDecoration
+        | Game's name:
+      input(type='text', value='{{gameName}}')
+      button(type='submit') Create game

@@ -1,0 +1,63 @@
+html
+  height 100%
+
+body
+  height 100%
+  width 100%
+  display flex
+  margin 0
+
+._main
+  flex 1
+  display flex
+  flex-direction column
+  padding 5px
+  background #bebebe
+
+button
+  width 7em
+  border-radius 5px
+  &:hover
+    background lightblue
+
+input
+  margin-bottom 5px
+
+table
+  &.-mainBorder
+    border 1px solid black
+    border-spacing 0
+    th
+      text-align left
+      &:first-child
+        border-right 1px solid black
+    td:first-child
+      border-right 1px solid black
+
+  &.-totalProfitBorder
+    border: 1px solid black
+
+._tableRounds
+  background #808080
+  color #ffffff
+
+.u-quantityTextColor
+  color #990000
+
+.u-priceTextColor
+  color blue
+
+.u-profitTextColor
+  color green
+
+.u-textAlign
+  text-align center
+
+.u-textDecoration
+  text-decoration underline
+
+.u-fontWeight
+  font-weight bold
+
+.u-fontSize
+  font-size 2em

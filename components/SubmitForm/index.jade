@@ -1,0 +1,6 @@
+index:
+  .SubmitForm
+    | Enter your quantity:
+    form.SubmitForm-form(on-submit='setQuantity()')
+      input(type='text', value='{{quantity}}')
+      button(type='submit') Submit

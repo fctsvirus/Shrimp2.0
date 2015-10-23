@@ -1,0 +1,28 @@
+index:
+  .GameInfo
+    .GameInfo-content
+      .u-textDecoration.u-fontWeight
+        | The name of the game:
+      .u-textAlign
+        | {{game.name}}
+    .GameInfo-content
+      .u-textDecoration.u-fontWeight
+        | Players in the game({{players.length || 0}} of {{game.maxPlayers}} connected):
+      each players as #player
+        .u-textAlign
+          | {{#root.users[#player.playerId].userName}}
+
+    .GameInfo-content
+      .u-textDecoration.u-fontWeight
+        | Professor:
+      each game.userIds as #userId
+        if #root.users[#userId].isProfessor
+          .u-textAlign
+            | {{#root.users[#userId].userName}}
+
+    if game.started && !game.finished
+      .GameInfo-content
+        .u-textDecoration.u-fontWeight
+          | Current round:
+        .u-textAlign
+          | {{game.currentRound}}

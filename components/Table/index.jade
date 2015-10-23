@@ -1,0 +1,58 @@
+index:
+  .Table
+    .Table-tables
+      .Table-tables-mainTable
+        table.-mainBorder
+          caption Results
+          thead
+            tr
+              td
+              each game.rounds as #round
+                td._tableRounds Round {{#round}}
+            tr
+              th.u-quantityTextColor Quantity
+              each game.rounds
+                td
+          tbody
+            on players
+              each Object.keys(players) as #playerIndex
+                tr
+                  td {{#root.users[players[#playerIndex].playerId].userName}}
+                  each players[#playerIndex].quantities as #quantity, #j
+                    td.u-quantityTextColor
+                      if players[#playerIndex].playerId == user.id || game.currentRound != #j + 1 || user.isProfessor || game.finished
+                        | {{roundValues(#quantity)}}
+            tr
+              th.u-priceTextColor(scope='row') Price
+              each prices as #price, #i
+                td.u-priceTextColor
+                  if game.currentRound != #i + 1 || user.isProfessor || game.finished
+                    | {{roundValues(#price)}}
+            tr
+              th.u-profitTextColor Profit
+              each game.rounds
+                td
+            each players as #player
+              tr
+                td {{#root.users[#player.playerId].userName}}
+                each profits[#player.playerId] as #profit, #j
+                  td
+                    if game.currentRound != #j + 1 || user.isProfessor || game.finished
+                      | {{roundValues(#profit)}}
+
+      table.-totalProfitBorder
+        thead
+          tr
+            th.u-profitTextColor Total Profit
+        tbody
+          each players as #player
+            tr
+              td
+                if game.started && (totalProfits[#player.playerId] || totalProfits[#player.playerId] == 0)
+                  | {{roundValues(totalProfits[#player.playerId])}}
+
+    if game.finished
+      .Table-winner.u-textAlign.u-fontSize
+        | The winner is
+        .u-fontWeight
+          | {{#root.users[winnerId].userName}}
