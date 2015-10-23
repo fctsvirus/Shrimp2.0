@@ -16,7 +16,7 @@ module.exports = class SubmitForm
     userIds = @model.get 'game.userIds'
     maxPlayers = @model.get 'game.maxPlayers'
     rounds = @model.get 'game.rounds'
-    if isNaN(parseFloat(quantity)) or not(consts.MIN_QUANTITY < parseFloat(quantity) <= consts.MAX_QUANTITY)
+    if isNaN(parseFloat(quantity)) or not(consts.MIN_QUANTITY <= parseFloat(quantity) <= consts.MAX_QUANTITY)
       return alert 'Wrong input!(should be a number between 0 and 75)'
     count = 0
     index = 0

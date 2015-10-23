@@ -1,4 +1,7 @@
 {
   "MIN_QUANTITY": 0,
-  "MAX_QUANTITY": 75
+  "MAX_QUANTITY": 75,
+  "MAX_PLAYERS": 2,
+  "CURRENT_ROUND": 1,
+  "MAX_ROUNDS": 8
 }

@@ -1,13 +1,13 @@
 _ = require 'lodash'
 
-exports.getGamesList = (games, user) ->
+exports.getGamesList = (games, isProfessor) ->
   list = []
   for game in games
     object =
       name: game.name
       id: game.id
       userIds: game.userIds
-      canJoin: !!(game.userIds.length < game.maxPlayers || user.isProfessor)
+      canJoin: !!(game.userIds.length < game.maxPlayers || isProfessor)
     list.push object
   list
 

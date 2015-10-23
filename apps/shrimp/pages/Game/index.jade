@@ -2,7 +2,7 @@ index:
   ._main
     view(is='GameInfo')
 
-    if user.isProfessor && game.currentRound < game.rounds.length
+    if game.started && user.isProfessor && game.currentRound < game.rounds.length
       view(is='Professor')
 
     if game.started && !game.finished && !user.isProfessor

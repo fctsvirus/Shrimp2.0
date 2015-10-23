@@ -12,7 +12,3 @@ module.exports = class User
     unless userName? and userName.trim().length > 0
       return alert 'You need to set a name!'
     @model.root.set 'users.' + @userId + '.userName', userName
-
-  setProfessor: ->
-    isProfessor = @model.get 'user.isProfessor'
-    @model.root.set 'users.' + @userId + '.isProfessor', isProfessor
