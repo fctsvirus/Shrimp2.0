@@ -5,8 +5,13 @@ index:
         | Become professor:
       input(type='checkbox', on-change='setProfessor()', checked='{{user.isProfessor}}')
 
+    .User-name
+      .u-textDecoration
+        | Username:
+      | {{user.userName}}
+
     form.User-form(on-submit='setUserName()')
       .u-textDecoration
-        | Player's name:
+        | Enter your name:
       input(type='text', value='{{userName}}')
       button(type='submit') Save

@@ -40,16 +40,17 @@ index:
                     if game.currentRound != #j + 1 || user.isProfessor || game.finished
                       | {{roundValues(#profit)}}
 
-      table.-totalProfitBorder
-        thead
-          tr
-            th.u-profitTextColor Total Profit
-        tbody
-          each players as #player
+      if game.finished || user.isProfessor
+        table.-totalProfitBorder
+          thead
             tr
-              td
-                if game.started && (totalProfits[#player.playerId] || totalProfits[#player.playerId] == 0)
-                  | {{roundValues(totalProfits[#player.playerId])}}
+              th.u-profitTextColor Total Profit
+          tbody
+            each players as #player
+              tr
+                td
+                  if totalProfits[#player.playerId] || totalProfits[#player.playerId] == 0
+                    | {{roundValues(totalProfits[#player.playerId])}}
 
     if game.finished
       .Table-winner.u-textAlign.u-fontSize

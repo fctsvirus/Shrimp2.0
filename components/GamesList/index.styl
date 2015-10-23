@@ -2,10 +2,23 @@
 
   margin-top 1.5em
 
-  &-a
-    text-decoration none
-    margin-left 5px
-    &:hover
-      text-decoration underline
-      color #990000
-      font-weight bold
+  &-data
+    display flex
+    &-gameName
+      flex 1
+      margin-bottom 0.1em
+    &-aContainer
+      flex 1
+      display flex
+      justify-content center
+      &-a
+        width 8em
+        text-decoration none
+        margin-bottom 0.1em
+        border 1px solid #808080
+        background #148013
+        &:hover
+          background #22ff1e
+          text-decoration underline
+          color #990000
+          font-weight bold

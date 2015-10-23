@@ -1,9 +1,11 @@
 index:
-  .GamesList
-    .u-textDecoration
-      | Games:
-    each gamesList as #game
-      div
+.GamesList
+  .u-textDecoration
+    | Games:
+  each gamesList as #game
+    .GamesList-data
+      .GamesList-data-gameName
         | {{#game.name}}
+      .GamesList-data-aContainer
         if #game.canJoin
-          a.GamesList-a(on-click='join(#game, $event)') Join
+          a.GamesList-data-aContainer-a.u-textAlign(on-click='join(#game)') Join

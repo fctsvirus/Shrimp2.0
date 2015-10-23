@@ -19,10 +19,9 @@ module.exports = class GamesList
       return alert 'You do not have a name'
     if not(@userId in game.userIds)
       if not isProfessor
-        @model.root.add 'players', {
+        @model.root.add 'players',
           gameId: game.id
           playerId: @userId
           quantities: []
-        }
       @model.root.push 'games.' + game.id + '.userIds', @userId
       @app.history.push '/game/' + game.id
