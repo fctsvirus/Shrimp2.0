@@ -1,4 +1,5 @@
 derby = require 'derby'
+_ = require 'lodash'
 
 app = module.exports = derby.createApp 'shrimp', __filename
 
@@ -21,6 +22,16 @@ app.component require '../../components/Table'
 
 app.loadViews __dirname + '/views'
 app.loadStyles __dirname + '/styles'
+
+app.on 'model', (model) ->
+  model.fn 'getPlayerIds', (players) ->
+    playerIds = _.pluck(players, 'id')
+    playerIds
+
+app.on 'model', (model) ->
+  model.fn 'getUserIds', (players) ->
+    userIds = _.pluck(players, 'userId')
+    userIds
 
 BaseController = require './Controller/BaseController'
 

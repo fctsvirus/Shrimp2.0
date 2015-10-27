@@ -11,7 +11,8 @@ module.exports = class CreateGame
       return alert 'You need to set the name of the game'
     @model.scope('games').add
       name: gameName
-      userIds: []
+      professorIds: []
+      playerCounter: 0
       rounds: [1..consts.MAX_ROUNDS]
       maxPlayers: consts.MAX_PLAYERS
       currentRound: consts.CURRENT_ROUND

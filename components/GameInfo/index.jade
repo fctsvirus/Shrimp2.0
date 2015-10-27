@@ -10,15 +10,14 @@ index:
         | Players in the game({{players.length || 0}} of {{game.maxPlayers}} connected):
       each players as #player
         .u-textAlign
-          | {{#root.users[#player.playerId].userName}}
+          | {{#root.users[#player.userId].userName}}
 
     .GameInfo-content
       .u-textDecoration.u-fontWeight
-        | Professor:
-      each game.userIds as #userId
-        if #root.users[#userId].isProfessor
-          .u-textAlign
-            | {{#root.users[#userId].userName}}
+        | Professor(s):
+      each game.professorIds as #professorId
+        .u-textAlign
+          | {{#root.users[#professorId].userName}}
 
     if game.started && !game.finished
       .GameInfo-content

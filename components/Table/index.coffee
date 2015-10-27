@@ -9,6 +9,7 @@ module.exports = class Table
   init: ->
     @model.ref 'game', @model.scope '_page.game'
     @model.ref 'players', @model.scope '_page.players'
+    @model.ref 'playerIds', @model.scope '_page.playerIds'
     @model.ref 'currentRound', @model.scope '_page.game.currentRound'
     @model.ref 'user', @model.scope '_page.user'
     @model.start 'prices', 'players', 'currentRound', reactiveFns.calculatePrices

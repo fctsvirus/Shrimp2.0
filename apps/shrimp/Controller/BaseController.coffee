@@ -1,3 +1,5 @@
+_ = require 'lodash'
+
 exports.getMainPage = (page, model) ->
   userId = model.get '_session.userId'
   user = model.at('users.' + userId)
@@ -13,9 +15,17 @@ exports.getGamePage = (page, model, params) ->
   model.subscribe game, ->
     model.ref '_page.game', game
     model.ref '_page.game.currentRound', 'games.' + params.gameId + '.currentRound'
-    usersInGame = model.query 'users', 'games.' + params.gameId + '.userIds'
+    usersInGame = model.query 'users', '_page.userIds'
     playersInGame = model.query 'players', { 'gameId': params.gameId }
     model.subscribe usersInGame, user, playersInGame, ->
       model.ref '_page.user', user
+      if not(userId in _.pluck(model.get('players'), 'userId'))
+        model.add 'players', {
+          gameId: params.gameId
+          userId: userId
+          quantities: []
+        }
+      model.start '_page.userIds', 'players', 'getUserIds'
+      model.start '_page.playerIds', 'players', 'getPlayerIds'
       model.ref '_page.players', playersInGame
       page.render 'page:Game'

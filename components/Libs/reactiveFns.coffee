@@ -6,8 +6,9 @@ exports.getGamesList = (games, isProfessor) ->
     object =
       name: game.name
       id: game.id
-      userIds: game.userIds
-      canJoin: !!(game.userIds.length < game.maxPlayers || isProfessor)
+      playerCounter: game.playerCounter
+      professorIds: game.professorIds
+      canJoin: !!(game.playerCounter < game.maxPlayers || isProfessor)
     list.push object
   list
 
@@ -25,10 +26,10 @@ exports.calculateProfits = (players, prices, currentRound) ->
   costPerShrimp = 5
   profits = {}
   for player in players
-    profits[player.playerId] = []
+    profits[player.userId] = []
     for i in [0..currentRound - 1]
       if player.quantities[i]? and prices[i]?
-        profits[player.playerId].push player.quantities[i] * (prices[i] - costPerShrimp)
+        profits[player.userId].push player.quantities[i] * (prices[i] - costPerShrimp)
   profits
 
 exports.calculateTotalProfits = (players, profits, currentRound) ->
@@ -37,14 +38,14 @@ exports.calculateTotalProfits = (players, profits, currentRound) ->
     for player in players
       totalProfit = 0
       for i in [0..currentRound - 2]
-        totalProfit += profits[player.playerId][i] if profits[player.playerId]?[i]?
-      totalProfits[player.playerId] = totalProfit
+        totalProfit += profits[player.userId][i] if profits[player.userId]?[i]?
+      totalProfits[player.userId] = totalProfit
   totalProfits
 
 exports.getTheWinner = (totalProfits, players, isFinished) ->
   if isFinished
     for player in players
-      if totalProfits[player.playerId] is _.max(totalProfits)
-        winnerId = player.playerId
+      if totalProfits[player.userId] is _.max(totalProfits)
+        winnerId = player.userId
         break
   winnerId

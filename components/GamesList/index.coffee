@@ -16,11 +16,9 @@ module.exports = class GamesList
     userName = @model.get 'user.userName'
     unless userName? and userName.trim().length > 0
       return alert 'You do not have a name'
-    if not(@userId in game.userIds)
-      if not isProfessor
-        @model.scope('players').add
-          gameId: game.id
-          playerId: @userId
-          quantities: []
-      @model.scope('games.' + game.id + '.userIds').push @userId
-      @app.history.push '/game/' + game.id
+    if isProfessor and not(@userId in game.professorIds)
+      @model.push @model.scope('games.' + game.id + '.professorIds'), @userId, =>
+        @app.history.push '/game/' + game.id
+    if not isProfessor
+      @model.increment @model.scope('games.' + game.id + '.playerCounter'), =>
+        @app.history.push '/game/' + game.id

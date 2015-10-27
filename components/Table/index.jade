@@ -14,14 +14,14 @@ index:
               each game.rounds
                 td
           tbody
-            on players
-              each Object.keys(players) as #playerIndex
+            each playerIds as #playerId
+              with #root.players[#playerId] as #player
                 tr
-                  td {{#root.users[players[#playerIndex].playerId].userName}}
-                  each players[#playerIndex].quantities as #quantity, #j
+                  td {{#root.users[#player.userId].userName}}
+                  each Object.keys(#player.quantities) as #quantity, #j
                     td.u-quantityTextColor
-                      if players[#playerIndex].playerId == user.id || game.currentRound != #j + 1 || user.isProfessor || game.finished
-                        | {{roundValues(#quantity)}}
+                      if #player.userId == user.id || game.currentRound != #j + 1 || user.isProfessor || game.finished
+                        | {{roundValues(#player.quantities[#quantity])}}
             tr
               th.u-priceTextColor(scope='row') Price
               each prices as #price, #i
@@ -32,13 +32,14 @@ index:
               th.u-profitTextColor Profit
               each game.rounds
                 td
-            each players as #player
-              tr
-                td {{#root.users[#player.playerId].userName}}
-                each profits[#player.playerId] as #profit, #j
-                  td
-                    if game.currentRound != #j + 1 || user.isProfessor || game.finished
-                      | {{roundValues(#profit)}}
+            each playerIds as #playerId
+              with #root.players[#playerId] as #player
+                tr
+                  td {{#root.users[#player.userId].userName}}
+                  each profits[#player.userId] as #profit, #j
+                    td
+                      if game.currentRound != #j + 1 || user.isProfessor || game.finished
+                        | {{roundValues(#profit)}}
 
       view(is='totalProfitsTable')
 
@@ -51,11 +52,12 @@ totalProfitsTable:
         tr
           th.u-profitTextColor Total Profit
       tbody
-        each players as #player
-          tr
-            td
-              if totalProfits[#player.playerId] || totalProfits[#player.playerId] == 0
-                | {{roundValues(totalProfits[#player.playerId])}}
+        each playerIds as #playerId
+          with #root.players[#playerId] as #player
+            tr
+              td
+                if totalProfits[#player.userId] || totalProfits[#player.userId] == 0
+                  | {{roundValues(totalProfits[#player.userId])}}
 
 theWinner:
   if game.finished
