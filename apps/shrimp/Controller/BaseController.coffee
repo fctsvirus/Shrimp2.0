@@ -19,12 +19,15 @@ exports.getGamePage = (page, model, params) ->
     playersInGame = model.query 'players', { 'gameId': params.gameId }
     model.subscribe usersInGame, user, playersInGame, ->
       model.ref '_page.user', user
-      if not(userId in _.pluck(model.get('players'), 'userId'))
-        model.add 'players', {
+      isProfessor = model.get '_page.user.isProfessor'
+      if not isProfessor and not(userId in _.pluck(model.get('players'), 'userId'))
+        model.add 'players',
           gameId: params.gameId
           userId: userId
           quantities: []
-        }
+        model.increment '_page.game.playerCounter'
+      else if isProfessor and not(userId in model.get('_page.game.professorIds'))
+        model.push '_page.game.professorIds', userId
       model.start '_page.userIds', 'players', 'getUserIds'
       model.start '_page.playerIds', 'players', 'getPlayerIds'
       model.ref '_page.players', playersInGame
